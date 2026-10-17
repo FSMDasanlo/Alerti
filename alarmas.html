@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1a54">
+  <title>Mis alarmas · Alerti</title>
+  <link rel="icon" type="image/png" href="img/logoAlerti.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/formulario.css">
+  <link rel="stylesheet" href="css/alarmas.css">
+  <link rel="stylesheet" href="css/aviso.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="back" href="index.html" aria-label="Volver al inicio">&larr;</a>
+      <img class="logo-mini" src="img/logoAlerti.png" alt="">
+      <h1>Mis alarmas</h1>
+      <a class="btn-add" href="nueva-alarma.html" aria-label="Nueva alarma">＋</a>
+    </header>
+
+    <ul id="lista" class="lista"></ul>
+
+    <div id="vacio" class="vacio" hidden>
+      <p>Aún no tienes alarmas.</p>
+      <a class="btn-primary" href="nueva-alarma.html">Crear la primera</a>
+    </div>
+  </main>
+
+  <script src="js/motor.js"></script>
+  <script src="js/alarmas.js"></script>
+</body>
+</html>

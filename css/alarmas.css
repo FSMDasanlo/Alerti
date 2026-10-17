@@ -1,0 +1,85 @@
+.btn-add {
+  margin-left: auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, var(--orange), var(--magenta));
+}
+
+.lista { list-style: none; display: grid; gap: 1rem; }
+
+.alarma {
+  --c: var(--blue);
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: var(--navy-light);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-left: 6px solid var(--c);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+  display: grid;
+  gap: .6rem;
+}
+
+.alarma.azul { --c: var(--blue); }
+.alarma.morado { --c: var(--purple); }
+.alarma.naranja { --c: var(--orange); }
+.alarma.magenta { --c: var(--magenta); }
+.alarma.inactiva .info { opacity: .45; }
+
+.alarma-cab { display: flex; align-items: center; gap: .8rem; }
+.hora { font-size: 2rem; font-weight: 700; color: var(--c); line-height: 1; }
+.titulo { font-weight: 600; font-size: 1.05rem; overflow-wrap: anywhere; }
+.info { flex: 1; min-width: 0; }
+.detalle { color: var(--text-soft); font-size: .88rem; margin-top: .2rem; }
+.texto { color: var(--text); font-size: .92rem; overflow-wrap: anywhere; }
+
+.switch { position: relative; flex: none; width: 3rem; height: 1.7rem; }
+.switch input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+.switch span {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, .25);
+  pointer-events: none;
+  transition: background .15s;
+}
+.switch span::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.7rem - 6px);
+  height: calc(1.7rem - 6px);
+  border-radius: 50%;
+  background: #fff;
+  transition: transform .15s;
+}
+.switch input:checked + span { background: linear-gradient(135deg, var(--cyan), var(--purple)); border-color: transparent; }
+.switch input:checked + span::after { transform: translateX(1.3rem); }
+.switch input:focus-visible + span { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+.acciones { display: flex; gap: .6rem; }
+.acciones a, .acciones button {
+  flex: 1;
+  font: inherit;
+  font-weight: 600;
+  padding: .55rem;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, .3);
+}
+.acciones a:hover { background: rgba(30, 144, 255, .2); border-color: var(--blue); }
+.acciones .eliminar:hover { background: rgba(230, 45, 216, .2); border-color: var(--magenta); }
+
+.vacio { text-align: center; display: grid; gap: 1rem; justify-items: center; color: var(--text-soft); padding: 2rem 0; }
+.vacio .btn-primary { flex: none; }

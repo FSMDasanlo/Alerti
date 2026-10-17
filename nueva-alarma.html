@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1a54">
+  <title>Nueva alarma · Alerti</title>
+  <link rel="icon" type="image/png" href="img/logoAlerti.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/formulario.css">
+  <link rel="stylesheet" href="css/aviso.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="back" href="index.html" aria-label="Volver al inicio">&larr;</a>
+      <img class="logo-mini" src="img/logoAlerti.png" alt="">
+      <h1>Nueva alarma</h1>
+    </header>
+
+    <form id="form-alarma" class="form" novalidate>
+      <div class="field">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" maxlength="60" placeholder="Ej: Tomar medicina" required>
+      </div>
+
+      <div class="field">
+        <label for="hora">Hora de inicio</label>
+        <input type="time" id="hora" class="big-time" required>
+      </div>
+
+      <div class="field">
+        <label for="frecuencia">Frecuencia</label>
+        <select id="frecuencia">
+          <option value="una-vez" selected>Una vez</option>
+          <option value="diaria">Diaria</option>
+          <option value="semanal">Semanal</option>
+          <option value="anual">Anual</option>
+          <option value="intervalo">Intervalo</option>
+        </select>
+      </div>
+
+      <div class="field" id="bloque-semanal" hidden>
+        <span class="label">Días de la semana</span>
+        <div class="chips" id="dias-semana">
+          <label class="chip"><input type="checkbox" value="1"><span>L</span></label>
+          <label class="chip"><input type="checkbox" value="2"><span>M</span></label>
+          <label class="chip"><input type="checkbox" value="3"><span>X</span></label>
+          <label class="chip"><input type="checkbox" value="4"><span>J</span></label>
+          <label class="chip"><input type="checkbox" value="5"><span>V</span></label>
+          <label class="chip"><input type="checkbox" value="6"><span>S</span></label>
+          <label class="chip"><input type="checkbox" value="0"><span>D</span></label>
+        </div>
+      </div>
+
+      <div class="field" id="bloque-intervalo" hidden>
+        <span class="label">Repetir cada</span>
+        <div class="row">
+          <input type="number" id="intervalo-valor" min="1" max="999" value="1" aria-label="Cantidad">
+          <select id="intervalo-unidad" aria-label="Unidad">
+            <option value="minutos">minutos</option>
+            <option value="horas" selected>horas</option>
+            <option value="dias">días</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="texto">Texto / observaciones</label>
+        <textarea id="texto" rows="3" maxlength="250" placeholder="Mensaje que se mostrará junto a la alarma"></textarea>
+      </div>
+
+      <div class="field">
+        <span class="label">Sonido</span>
+        <div class="segmented" role="radiogroup" aria-label="Sonido">
+          <label><input type="radio" name="sonido" value="si" checked><span>Sí</span></label>
+          <label><input type="radio" name="sonido" value="no"><span>No</span></label>
+        </div>
+      </div>
+
+      <div class="field" id="bloque-tono">
+        <label for="tono">Tono</label>
+        <div class="row">
+          <select id="tono">
+            <option value="campana">Campana</option>
+            <option value="beep">Beep</option>
+            <option value="suave">Suave</option>
+            <option value="urgente">Urgente</option>
+          </select>
+          <button type="button" id="probar-tono" class="btn-ghost">Probar</button>
+        </div>
+      </div>
+
+      <div class="field two">
+        <div>
+          <label for="desde" id="lbl-desde">Desde</label>
+          <input type="date" id="desde" required>
+        </div>
+        <div id="bloque-hasta">
+          <label for="hasta">Hasta <small>(opcional)</small></label>
+          <input type="date" id="hasta">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="posponer">Posponer (repetir aviso si no lo atiendo)</label>
+        <select id="posponer">
+          <option value="0">No</option>
+          <option value="5" selected>5 minutos</option>
+          <option value="10">10 minutos</option>
+          <option value="15">15 minutos</option>
+          <option value="30">30 minutos</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <span class="label">Color</span>
+        <div class="colors" id="colores">
+          <label><input type="radio" name="color" value="azul" checked><span class="dot azul"></span></label>
+          <label><input type="radio" name="color" value="morado"><span class="dot morado"></span></label>
+          <label><input type="radio" name="color" value="naranja"><span class="dot naranja"></span></label>
+          <label><input type="radio" name="color" value="magenta"><span class="dot magenta"></span></label>
+        </div>
+      </div>
+
+      <p id="error" class="error" role="alert" hidden></p>
+
+      <div class="actions">
+        <a class="btn-ghost" href="index.html">Cancelar</a>
+        <button type="submit" class="btn-primary">Guardar alarma</button>
+      </div>
+    </form>
+
+    <div id="toast" class="toast" role="status" hidden>Alarma guardada</div>
+  </main>
+
+  <script src="js/motor.js"></script>
+  <script src="js/nueva-alarma.js"></script>
+</body>
+</html>

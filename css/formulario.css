@@ -1,0 +1,180 @@
+[hidden] { display: none !important; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.topbar h1 {
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, var(--cyan), var(--purple), var(--orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.back {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--navy-light);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.3rem;
+  border: 1px solid rgba(255, 255, 255, .12);
+}
+
+.logo-mini { width: 2.5rem; height: 2.5rem; border-radius: 24%; }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 20px;
+  background: var(--navy-light);
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+}
+
+.field { display: flex; flex-direction: column; gap: .4rem; }
+.field label, .field .label { font-weight: 600; font-size: .95rem; }
+.field small { color: var(--text-soft); font-weight: 400; }
+
+input[type="text"], input[type="time"], input[type="date"], input[type="number"],
+select, textarea {
+  width: 100%;
+  padding: .7rem .85rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 12px;
+  color-scheme: dark;
+}
+
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 1px;
+}
+
+textarea { resize: vertical; }
+
+.big-time { font-size: 2rem; text-align: center; letter-spacing: 2px; }
+
+.row { display: flex; gap: .6rem; }
+.row input { max-width: 7rem; }
+.row select { flex: 1; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.two > div { display: flex; flex-direction: column; gap: .4rem; }
+.two label { font-weight: 600; font-size: .95rem; }
+
+.chips { display: flex; gap: .4rem; flex-wrap: wrap; }
+.chip input, .segmented input, .colors input { position: absolute; opacity: 0; pointer-events: none; }
+
+.chip span {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, .2);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.chip input:checked + span {
+  background: linear-gradient(135deg, var(--purple), var(--magenta));
+  border-color: transparent;
+}
+
+.chip input:focus-visible + span,
+.segmented input:focus-visible + span,
+.colors input:focus-visible + .dot { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+.segmented { display: flex; gap: .5rem; }
+.segmented label { flex: 1; }
+.segmented span {
+  display: block;
+  text-align: center;
+  padding: .65rem;
+  border-radius: 12px;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, .2);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.segmented input:checked + span {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  border-color: transparent;
+}
+
+.colors { display: flex; gap: .8rem; }
+.dot {
+  display: block;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+.dot.azul { background: var(--blue); }
+.dot.morado { background: var(--purple); }
+.dot.naranja { background: var(--orange); }
+.dot.magenta { background: var(--magenta); }
+.colors input:checked + .dot { border-color: #fff; }
+
+.actions { display: flex; gap: .75rem; margin-top: .5rem; }
+
+.btn-primary, .btn-ghost {
+  font: inherit;
+  font-weight: 700;
+  padding: .8rem 1.2rem;
+  border-radius: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, var(--orange), var(--magenta));
+  box-shadow: 0 6px 18px rgba(230, 45, 216, .3);
+}
+
+.btn-primary:hover { filter: brightness(1.1); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .3);
+}
+
+.btn-ghost:hover { background: rgba(255, 255, 255, .08); }
+
+.error {
+  padding: .7rem .9rem;
+  border-radius: 12px;
+  background: rgba(255, 138, 31, .15);
+  border: 1px solid var(--orange);
+  color: var(--yellow);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  padding: .8rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .4);
+}
