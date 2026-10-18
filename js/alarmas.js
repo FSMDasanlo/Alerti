@@ -27,6 +27,47 @@
     return a.hasta ? `Del ${fecha(a.desde)} al ${fecha(a.hasta)}` : `Desde el ${fecha(a.desde)}`;
   }
 
+  const pad = (n) => String(n).padStart(2, '0');
+  const fmtLocal = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+  const CODIGO_DIA = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+
+  // Google Calendar no admite repeticiones por minutos u horas.
+  function reglaRepeticion(a) {
+    let r = null;
+    switch (a.frecuencia) {
+      case 'diaria': r = 'FREQ=DAILY'; break;
+      case 'semanal': r = `FREQ=WEEKLY;BYDAY=${a.diasSemana.map((d) => CODIGO_DIA[d]).join(',')}`; break;
+      case 'anual': r = 'FREQ=YEARLY'; break;
+      case 'intervalo':
+        if (a.intervalo.unidad !== 'dias') return undefined;
+        r = `FREQ=DAILY;INTERVAL=${a.intervalo.valor}`;
+        break;
+      default: return null;
+    }
+    if (a.hasta) {
+      const [y, m, d] = a.hasta.split('-').map(Number);
+      const fin = new Date(y, m - 1, d, 23, 59, 59).toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+      r += `;UNTIL=${fin}`;
+    }
+    return r;
+  }
+
+  function urlCalendar(a) {
+    const [y, m, d] = a.desde.split('-').map(Number);
+    const [hh, mm] = a.hora.split(':').map(Number);
+    const ini = new Date(y, m - 1, d, hh, mm);
+    const fin = new Date(ini.getTime() + 15 * 60000);
+    const p = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: a.titulo,
+      details: a.texto || '',
+      dates: `${fmtLocal(ini)}/${fmtLocal(fin)}`,
+    });
+    const regla = reglaRepeticion(a);
+    if (regla) p.set('recur', `RRULE:${regla}`);
+    return `https://calendar.google.com/calendar/render?${p}`;
+  }
+
   function crear(a) {
     const li = document.createElement('li');
     li.className = `alarma ${a.color}${a.activa ? '' : ' inactiva'}`;
@@ -79,7 +120,15 @@
     eliminar.className = 'eliminar';
     eliminar.dataset.accion = 'eliminar';
     eliminar.textContent = 'Eliminar';
-    acc.append(editar, eliminar);
+    const cal = document.createElement('a');
+    cal.href = urlCalendar(a);
+    cal.target = '_blank';
+    cal.rel = 'noopener';
+    cal.textContent = 'Google Calendar';
+    if (reglaRepeticion(a) === undefined) {
+      cal.title = 'Google Calendar no admite repeticiones por minutos u horas: se creará un único evento.';
+    }
+    acc.append(editar, cal, eliminar);
     li.append(acc);
 
     return li;
